@@ -1,23 +1,23 @@
-import logo from './logo.svg';
 import './App.css';
+import Formulario from './components/formulario';
+import Card from './components/card';
+import Encabezado from './components/encabezado';
+import WelcomeMessage from './components/bienvenida'; // Importa el componente de mensaje de bienvenida
+import React, { useState } from 'react';
 
 function App() {
+  const [userData, setUserData] = useState({ nombre: '', correo: '' });
+
+  const actualizarDatosFormulario = (datos) => {
+    setUserData(datos);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Encabezado />
+      <Formulario onFormSubmit={actualizarDatosFormulario} />
+      <Card {...userData} />
+      <WelcomeMessage nombre={userData.nombre} /> {/* Muestra el mensaje de bienvenida */}
     </div>
   );
 }
